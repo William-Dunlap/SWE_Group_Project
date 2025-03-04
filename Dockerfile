@@ -1,29 +1,29 @@
-# Step 1: Build the React app (using Node.js)
+# Use multi-stage builds to build React first
 FROM node:16 AS build
 
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend/ ./
-RUN npm run build  # This will generate the React build in /app/frontend/build
+RUN npm run build
 
-# Step 2: Set up the Flask app (using Python)
+# Set up the Flask app
 FROM python:3.9-slim
 
-# Install system dependencies and Python dependencies
 WORKDIR /app
-COPY main/requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy Flask app code into container
-COPY main/ /app/
+# Install Flask
+RUN pip install flask
 
-# Copy the React build files into the Flask app's static directory (for serving)
-COPY --from=build /app/frontend/build /app/static
+# Copy Flask app (main.py)
+COPY main.py /app/
 
-# Expose necessary ports
+# Copy React build output to Flask's serving directory
+COPY --from=build /app/frontend/public/static /app/static
+COPY --from=build /app/frontend/public/templates /app/templates
+
+# Expose Flask port
 EXPOSE 5000
-EXPOSE 80
 
-# Run both Flask and serve the React app (Flask serves React from static folder)
-CMD ["sh", "-c", "python app.py & npx serve /app/static -p 80"]
+# Run Flask app
+CMD ["python", "main.py"]
