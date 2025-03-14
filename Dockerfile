@@ -1,14 +1,23 @@
-# Use a lightweight Python image
+# Stage 1: Build React app
+FROM node:18 as react-build
+
+WORKDIR /app/frontend
+
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
+# Stage 2: Flask app
 FROM python:3.9-slim
 
-# Set the working directory
 WORKDIR /app
 
 # Copy Flask app
 COPY main.py /app/
 
-# Copy the React public folder (with templates and static)
-COPY frontend/public /app/frontend/public
+# Copy React build output
+COPY --from=react-build /app/frontend/build/ /app/frontend/public/
 
 # Install Flask
 RUN pip install flask
