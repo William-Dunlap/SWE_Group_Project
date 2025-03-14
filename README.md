@@ -1,4 +1,4 @@
-# SWE_Group_Project
+# SWE_Group_Project (For Development)
 First clone the repository \
 Navigate to the directory using the command line \
 Add flask to the interpreter with 
@@ -15,5 +15,13 @@ Look at the bottom right and click the terminal button
 Run 
 * docker build -t flask-react-app .
 * docker run -p 5000:5000 flask-react-app
+
+Then go to localhost:5000 to view the page
+
+# SWE_Group_Project
+First clone the repository \
+Navigate to the directory using the command line \
+Run:
+* docker-compose up --build \
 
 Then go to localhost:5000 to view the page
