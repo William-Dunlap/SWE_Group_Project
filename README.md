@@ -20,8 +20,8 @@ Then go to localhost:5000 to view the page
 
 # SWE_Group_Project
 First clone the repository \
-Navigate to the directory using the command line \
+Navigate to the directory using the command line in the Docker Desktop App \
 Run:
-* docker-compose up --build \
+* docker-compose up --build 
 
 Then go to localhost:5000 to view the page
