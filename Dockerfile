@@ -9,7 +9,6 @@ COPY frontend/ ./
 RUN npm run build
 
 # Install Firebase in the main project directory (outside of /frontend)
-WORKDIR /app
 RUN npm install firebase
 
 

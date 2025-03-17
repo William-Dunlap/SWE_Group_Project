@@ -21,13 +21,12 @@ def signup():
     username = data.get("username")
     password = data.get("password")
 
-
     if not username or not password:
         return jsonify({"error": "Missing credentials"}), 400
 
     try:
         # Firebase requires an email, so we generate a fake one
-        email = f"{username}@example.com"
+        email = f"{username}@ufl.edu"
         user = auth.create_user(email=email, password=password)
 
         # Store username and password in Firestore
