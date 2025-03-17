@@ -20,8 +20,7 @@ def signup():
     data = request.json
     username = data.get("username")
     password = data.get("password")
-    print(username)
-    print(password)
+
 
     if not username or not password:
         return jsonify({"error": "Missing credentials"}), 400

@@ -8,6 +8,8 @@ RUN npm install
 COPY frontend/ ./
 RUN npm run build
 
+# Install Firebase in the main project directory (outside of /frontend)
+WORKDIR /app
 RUN npm install firebase
 
 
@@ -18,11 +20,14 @@ WORKDIR /app
 
 # Copy Flask app
 COPY main.py /app/
+COPY firebase_config.py /app/
+COPY chompbooks-privatekey.json /app/
+
 
 # Copy React build output
 COPY --from=react-build /app/frontend/build/ /app/frontend/public/
 
-# Install Flask
+# Install Flask and Firebase Admin for the Flask app
 RUN pip install flask
 RUN pip install firebase-admin
 
