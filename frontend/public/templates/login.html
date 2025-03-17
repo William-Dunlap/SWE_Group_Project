@@ -7,26 +7,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
+        <div id="message-container"></div> <!-- Container for messages -->
 
-    <div id="message-container"></div> <!-- Container for messages -->
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
 
-    <h2>Login</h2>
-    <form id="login-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" required><br>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" required><br>
+            <button type="submit" id="login-button">Login</button>
+        </form>
 
-        <button type="submit">Login</button>
-    </form>
+        <div class="alternative-actions">
+            <button id="create-account-btn" type="button">Create Account</button>
+        </div>
+    </div>
 
-    <button id="create-account-btn">Create Account</button>
-
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
-    <script src="{{ url_for('static', filename='firebase.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='firebase.js') }}" defer></script>
 </body>
 </html>
