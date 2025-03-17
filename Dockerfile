@@ -8,6 +8,9 @@ RUN npm install
 COPY frontend/ ./
 RUN npm run build
 
+RUN npm install firebase
+
+
 # Stage 2: Flask app
 FROM python:3.9-slim
 
@@ -21,6 +24,7 @@ COPY --from=react-build /app/frontend/build/ /app/frontend/public/
 
 # Install Flask
 RUN pip install flask
+RUN pip install firebase-admin
 
 # Set Flask environment variables
 ENV FLASK_APP=main.py
