@@ -49,7 +49,7 @@ def add_book():
         author = data.get("author")
         course_number = data.get("courseNumber")
         professor = data.get("professor")
-        price = data.get("price")
+        price = float(data.get("price"))
 
         # Make sure all fields are present
         if not all([title, author, course_number, professor, price]):
@@ -71,7 +71,7 @@ def add_book():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("/"))
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
