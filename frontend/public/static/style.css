@@ -202,3 +202,47 @@ button:hover {
     margin-top: 10px;
     font-size: 16px;
 }
+#search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#search-input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+#search-button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    background-color: #0150db;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-button img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+
+#search-form button:hover {
+    background-color: #00399e;
+}

@@ -9,12 +9,15 @@
 <body>
     <div class="menu-bar">
         <a href="/"><img src="../static/gator.png" alt="Home"></a>
-        <h1>Welcome to ChompBooks</h1>
+        <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search books...">
+            <button type="submit" id="search-button"><img src="../static/search.png" alt="Search"></button>
+        </form>
         <a href="profile"><img src="../static/profile.png" alt="Profile"></a>
     </div>
     <h2>=====</h2>
 
-    <div class="book-list">
+    <div id="book-container" class="book-list">
         {% for book in books %}
             <div class="book-card">
                 <h2>{{ book.title }}</h2>
@@ -27,6 +30,6 @@
             <p class="no-books">No books available.</p>
         {% endfor %}
     </div>
-
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
 </body>
 </html>
