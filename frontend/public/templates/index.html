@@ -9,11 +9,24 @@
 <body>
     <div class="menu-bar">
         <a href="/"><img src="../static/gator.png" alt="Technology Image"></a>
+        <h1>Welcome to ChompBooks</h1>
         <a href="login"><span>Log in here</span></a>
     </div>
-    <h1>Welcome to ChompBooks</h1>
+    <h2>=====</h2>
 
-
+    <div class="book-list">
+        {% for book in books %}
+            <div class="book-card">
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Professor:</strong> {{ book.professor }}</p>
+                <p><strong>Course Number:</strong> {{ book.courseNumber }}</p>
+                <p><strong>Price:</strong> ${{ book.price }}</p>
+            </div>
+        {% else %}
+            <p class="no-books">No books available.</p>
+        {% endfor %}
+    </div>
 
 </body>
 </html>

@@ -3,12 +3,20 @@ body {
     background-color: #111;
     color: #aaa;
     margin: 0;
+    background: url('../static/background.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 h1 {
     color: #aaa;
     margin: 0;
-    padding-top: 65px
 
+}
+h2 {
+    padding-top: 60px
+    padding-bottom: 10px
+    color: #aaa;
+    margin: 0;
+    font-size: 55px
 }
 .login-box {
     width: 100%;
@@ -99,5 +107,37 @@ button:hover {
     background-color: #005;
     height: 45px;
 }
+.book-list {
+    display: flex;
+    flex-direction: column; /* Stack the book cards vertically */
+    align-items: center; /* Center the book cards horizontally */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    max-height: 85vh; /* Set the maximum height for scrolling */
+    padding: 10px;
+}
 
+.book-card {
+    width: 600px; /* Set the same width for all cards */
+    background-color: #f4f4f4; /* Light background for the cards */
+    padding: 20px;
+    margin: 10px 0; /* Vertical margin between cards */
+    border-radius: 10px; /* Slight rounding of corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
 
+.book-card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.book-card p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.book-card p strong {
+    font-weight: bold;
+}

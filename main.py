@@ -1,11 +1,17 @@
 from flask import Flask, request, render_template, jsonify
 from firebase_config import auth
+from firebase_config import db
 
 app = Flask(__name__, template_folder="frontend/public/templates", static_folder="frontend/public/static")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    try:
+        books_ref = db.collection("books")  # Change "books" to your actual collection name
+        books = [doc.to_dict() for doc in books_ref.stream()]
+        return render_template("index.html", books=books)
+    except Exception as e:
+        return f"Error loading books: {str(e)}", 500
 
 @app.route("/login")
 def login_page():
