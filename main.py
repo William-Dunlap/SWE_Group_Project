@@ -73,5 +73,18 @@ def logout():
     session.clear()
     return redirect(url_for("index"))
 
+@app.route("/search")
+def search():
+    query = request.args.get("q", "").lower()
+    books_ref = db.collection("books")
+    results = []
+
+    for doc in books_ref.stream():
+        book = doc.to_dict()
+        if any(query in str(book.get(field, "")).lower() for field in ["title", "author", "courseNumber", "professor"]):
+            results.append(book)
+
+    return jsonify(results)
+
 if __name__ == "__main__":
     app.run(debug=True)
