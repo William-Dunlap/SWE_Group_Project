@@ -5,6 +5,13 @@ body {
     margin: 0;
     background: url('../static/background.jpg') no-repeat center center fixed;
     background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+
 }
 h1 {
     color: #aaa;
@@ -118,7 +125,7 @@ button:hover {
 
 .book-card {
     width: 600px; /* Set the same width for all cards */
-    background-color: #f4f4f4; /* Light background for the cards */
+    background-color: #003; /* Light background for the cards */
     padding: 20px;
     margin: 10px 0; /* Vertical margin between cards */
     border-radius: 10px; /* Slight rounding of corners */
@@ -126,6 +133,7 @@ button:hover {
     text-align: left;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 0 3px 1px #ff6c00;
 }
 
 .book-card h2 {
@@ -140,4 +148,57 @@ button:hover {
 
 .book-card p strong {
     font-weight: bold;
+}
+.book-card:hover {
+    transform: scale(1.03);
+    background-color: #00085d;
+    box-shadow: 0 0 10px 2px #ff6c00;
+}
+
+.form-card {
+    width: 600px;
+    background-color: #003;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 1px #ff6c00;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Additional tweaks */
+.form-card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.form-card input {
+    width: 96.3%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-card button {
+    width: 100%;
+    padding: 10px;
+    background: #0150db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-card button:hover {
+    background: #00399e;
+}
+
+#add-book-message {
+    margin-top: 10px;
+    font-size: 16px;
 }

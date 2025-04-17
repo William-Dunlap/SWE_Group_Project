@@ -1,13 +1,19 @@
-from flask import Flask, request, render_template, jsonify
-from firebase_config import auth
-from firebase_config import db
+from flask import Flask, request, render_template, jsonify, session, redirect, url_for
+from firebase_config import auth, db
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import auth as firebase_auth
+import os
 
 app = Flask(__name__, template_folder="frontend/public/templates", static_folder="frontend/public/static")
+
+# Generate a secure secret key
+app.secret_key = os.urandom(24)
 
 @app.route("/")
 def index():
     try:
-        books_ref = db.collection("books")  # Change "books" to your actual collection name
+        books_ref = db.collection("books")
         books = [doc.to_dict() for doc in books_ref.stream()]
         return render_template("index.html", books=books)
     except Exception as e:
@@ -19,38 +25,53 @@ def login_page():
 
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
+    if 'user_email' not in session:
+        return redirect(url_for("login_page"))
+    return render_template("profile.html", user_email=session['user_email'])
 
-@app.route("/signup", methods=["POST"])
-def signup():
-    data = request.json
-    email = data.get("username")
-    password = data.get("password")
-
-    if not email or not password:
-        return jsonify({"error": "Missing credentials"}), 400
-
+@app.route("/session-login", methods=["POST"])
+def session_login():
+    id_token = request.json.get("idToken")
     try:
-        # Create user in Firebase Auth
-        user = auth.create_user(email=email, password=password)
-        return jsonify({"message": "Account created successfully"}), 200
+        decoded_token = firebase_auth.verify_id_token(id_token)
+        session['user_email'] = decoded_token.get("email")
+        return jsonify({"message": "Session created"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": str(e)}), 401
 
-@app.route("/login", methods=["POST"])
-def login():
-    data = request.json
-    email = data.get("username")
-    password = data.get("password")
-
-    if not email or not password:
-        return jsonify({"error": "Missing credentials"}), 400
-
+@app.route("/add-book", methods=["POST"])
+def add_book():
     try:
-        # Firebase Auth handles login on the client side (firebase.js)
-        return jsonify({"message": "Login successful"}), 200
+        # Ensure you're getting the data as JSON
+        data = request.get_json()  # use get_json(), not request.json
+
+        title = data.get("title")
+        author = data.get("author")
+        course_number = data.get("courseNumber")
+        professor = data.get("professor")
+        price = data.get("price")
+
+        # Make sure all fields are present
+        if not all([title, author, course_number, professor, price]):
+            return jsonify({"error": "All fields are required"}), 400
+
+        # Add the book to Firestore
+        book_ref = db.collection("books").add({
+            "title": title,
+            "author": author,
+            "courseNumber": course_number,
+            "professor": professor,
+            "price": price
+        })
+
+        return jsonify({"message": "Book added successfully!"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("/"))
 
 if __name__ == "__main__":
     app.run(debug=True)

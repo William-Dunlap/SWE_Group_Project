@@ -2,16 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="menu-bar">
-        <a href="/"><img src="../static/gator.png" alt="Technology Image"></a>
-        <a href="profile"><span>Profile</span></a>
+        <a href="/"><img src="../static/gator.png" alt="Gator"></a>
+        <h1>Welcome {{ user_email }}</h1>
+        <a href="/logout"><span>Logout</span></a>
     </div>
-    <h1>Welcome to your profile page!</h1>
-    <p>Only logged-in users should see this page.</p>
+
+    <h2>=====</h2>
+
+    <!-- Form Card for adding a book -->
+    <div class="form-card">
+        <h2>Add a Book</h2>
+        <form id="add-book-form">
+            <input type="text" placeholder="Title" name="title" required>
+            <input type="text" placeholder="Author" name="author" required>
+            <input type="text" placeholder="Course Number" name="courseNumber" required>
+            <input type="text" placeholder="Professor" name="professor" required>
+            <input type="number" placeholder="Price" name="price" required>
+            <button type="submit">Add Book</button>
+        </form>
+        <div id="add-book-message"></div>
+    </div>
+
+    <!-- Link to the new add_books.js file -->
+    <script type="module" src="{{ url_for('static', filename='add_books.js') }}"></script>
 </body>
 </html>
