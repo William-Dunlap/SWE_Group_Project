@@ -25,6 +25,7 @@
                 <p><strong>Professor:</strong> {{ book.professor }}</p>
                 <p><strong>Course Number:</strong> {{ book.courseNumber }}</p>
                 <p><strong>Price:</strong> ${{ book.price }}</p>
+                <button class="buy-button" data-id="{{ book.doc_id }}">Buy</button>
             </div>
         {% else %}
             <p class="no-books">No books available.</p>

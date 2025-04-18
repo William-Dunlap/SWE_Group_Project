@@ -22,3 +22,25 @@ document.getElementById("search-form").addEventListener("submit", async (e) => {
         container.appendChild(div);
     });
 });
+
+document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("buy-button")) {
+        const bookId = e.target.dataset.id;
+
+        const confirmed = confirm("Are you sure you want to buy this book?");
+        if (!confirmed) return;
+
+        const response = await fetch(`/delete-book/${bookId}`, {
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            // Remove the book card from the DOM
+            e.target.closest(".book-card").remove();
+        } else {
+            const error = await response.json();
+            alert("Error: " + error.error);
+        }
+    }
+});
+
