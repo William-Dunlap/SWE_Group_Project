@@ -245,3 +245,22 @@ button:hover {
 #search-form button:hover {
     background-color: #00399e;
 }
+.buy-button {
+    position: center;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ff6c00;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.buy-button:hover {
+    background-color: #964b00;
+
+}
+.book-card {
+    position: relative;
+    padding-top: 10px; /* space for button */
+}

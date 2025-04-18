@@ -1,23 +1,32 @@
 document.getElementById("add-book-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Collect data from the form and convert it to a plain object
-    const formData = new FormData(e.target);
+    const form = e.target;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // Send the data as JSON to the backend
     const response = await fetch("/add-book", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"  // Make sure we are sending JSON
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)  // Send the data as a JSON string
+        body: JSON.stringify(data)
     });
 
     const message = document.getElementById("add-book-message");
     const result = await response.json();
-    console.log("Backend response:", result);  // Debug log for response
+    console.log("Backend response:", result);
 
     message.textContent = result.message || result.error;
     message.style.color = response.ok ? "green" : "red";
+
+    if (response.ok) {
+        // Clear form fields
+        form.reset();
+
+        // Remove message after ~2 seconds
+        setTimeout(() => {
+            message.textContent = "";
+        }, 2000);
+    }
 });

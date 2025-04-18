@@ -14,7 +14,11 @@ app.secret_key = os.urandom(24)
 def index():
     try:
         books_ref = db.collection("books")
-        books = [doc.to_dict() for doc in books_ref.stream()]
+        books = []
+        for doc in books_ref.stream():
+            book = doc.to_dict()
+            book["doc_id"] = doc.id  # Add document ID
+            books.append(book)
         return render_template("index.html", books=books)
     except Exception as e:
         return f"Error loading books: {str(e)}", 500
@@ -85,6 +89,14 @@ def search():
             results.append(book)
 
     return jsonify(results)
+
+@app.route("/delete-book/<book_id>", methods=["DELETE"])
+def delete_book(book_id):
+    try:
+        db.collection("books").document(book_id).delete()
+        return jsonify({"message": "Book deleted"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
