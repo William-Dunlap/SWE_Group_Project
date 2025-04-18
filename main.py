@@ -7,7 +7,6 @@ import os
 
 app = Flask(__name__, template_folder="frontend/public/templates", static_folder="frontend/public/static")
 
-# Generate a secure secret key
 app.secret_key = os.urandom(24)
 
 @app.route("/")
@@ -17,7 +16,7 @@ def index():
         books = []
         for doc in books_ref.stream():
             book = doc.to_dict()
-            book["doc_id"] = doc.id  # Add document ID
+            book["doc_id"] = doc.id
             books.append(book)
         return render_template("index.html", books=books)
     except Exception as e:
@@ -46,20 +45,16 @@ def session_login():
 @app.route("/add-book", methods=["POST"])
 def add_book():
     try:
-        # Ensure you're getting the data as JSON
-        data = request.get_json()  # use get_json(), not request.json
-
+        data = request.get_json()
         title = data.get("title")
         author = data.get("author")
         course_number = data.get("courseNumber")
         professor = data.get("professor")
         price = float(data.get("price"))
 
-        # Make sure all fields are present
         if not all([title, author, course_number, professor, price]):
             return jsonify({"error": "All fields are required"}), 400
 
-        # Add the book to Firestore
         book_ref = db.collection("books").add({
             "title": title,
             "author": author,
@@ -85,6 +80,7 @@ def search():
 
     for doc in books_ref.stream():
         book = doc.to_dict()
+        book["doc_id"] = doc.id
         if any(query in str(book.get(field, "")).lower() for field in ["title", "author", "courseNumber", "professor"]):
             results.append(book)
 
