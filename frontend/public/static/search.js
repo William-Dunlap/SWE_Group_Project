@@ -11,7 +11,7 @@ document.getElementById("search-form").addEventListener("submit", async (e) => {
         const div = document.createElement("div");
         div.className = "book-card";
         div.innerHTML = `
-                <h3>${book.title}</h3>
+                <h2>${book.title}</h2>
                 <p><strong>Author:</strong> ${book.author}</p>
                 <p><strong>Course:</strong> ${book.courseNumber}</p>
                 <p><strong>Professor:</strong> ${book.professor}</p>

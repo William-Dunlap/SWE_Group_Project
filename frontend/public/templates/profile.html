@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="menu-bar">
         <a href="/"><img src="../static/gator.png" alt="Gator"></a>
         <h1>Welcome {{ user_email }}</h1>
-        <a href="/logout"><img src="../static/logout.png" alt="Profile"></a>
+        <a href="/logout"><img src="../static/logout.png" alt="Logout"></a>
     </div>
 
-    <h2>=====</h2>
-
-    <div class="form-card">
-        <h2>Add a Book</h2>
-        <form id="add-book-form" method="POST">
-            <input type="text" placeholder="Title" name="title" required>
-            <input type="text" placeholder="Author" name="author" required>
-            <input type="text" placeholder="Course Number  i.e. (EEL4744)" name="courseNumber" required>
-            <input type="text" placeholder="Professor" name="professor" required>
-            <input type="number" step="0.01" placeholder="Price" name="price" required>
-            <button type="submit">Add Book</button>
-        </form>
-        <div id="add-book-message"></div>
+    <div class="main-content">
+        <div class="form-card">
+            <h2>Add a Book</h2>
+            <form id="add-book-form" method="POST">
+                <input type="text" placeholder="Title" name="title" required>
+                <input type="text" placeholder="Author" name="author" required>
+                <input type="text" placeholder="Course Number  i.e. (EEL4744)" name="courseNumber" required>
+                <input type="text" placeholder="Professor" name="professor" required>
+                <input type="number" step="0.01" placeholder="Price" name="price" required>
+                <button type="submit">Add Book</button>
+            </form>
+            <div id="add-book-message"></div>
+        </div>
     </div>
 
     <script type="module" src="{{ url_for('static', filename='add_books.js') }}"></script>

@@ -7,26 +7,33 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="login-box">
-        <div id="message-container"></div>
+    <div class="menu-bar">
+        <a href="/"><img src="../static/gator.png" alt="Home"></a>
+        <a href="/signup"><img src="../static/profile.png" alt="Signup"></a>
+    </div>
 
-        <h2>Login</h2>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+    <div class="main-content">
+        <div class="login-box">
+            <div id="message-container"></div>
+
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" id="login-button">Login</button>
+            </form>
+
+            <div class="alternative-actions">
+                <button id="create-account-btn" type="button">Create Account</button>
             </div>
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <button type="submit" id="login-button">Login</button>
-        </form>
-
-        <div class="alternative-actions">
-            <button id="create-account-btn" type="button">Create Account</button>
         </div>
     </div>
 
