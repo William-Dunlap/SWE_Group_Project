@@ -21,10 +21,8 @@ document.getElementById("add-book-form").addEventListener("submit", async (e) =>
     message.style.color = response.ok ? "green" : "red";
 
     if (response.ok) {
-        // Clear form fields
         form.reset();
 
-        // Remove message after ~2 seconds
         setTimeout(() => {
             message.textContent = "";
         }, 2000);
